@@ -1,13 +1,13 @@
 package main
 
 type Iterator struct {
-	head    *Message
-	tail    *Message
-	current *Message
+	head    *Node
+	tail    *Node
+	current *Node
 	count   int
 }
 
-func NewIterator(head *Message, tail *Message, count int) *Iterator {
+func NewIterator(head *Node, tail *Node, count int) *Iterator {
 	return &Iterator{
 		head:    head,
 		tail:    tail,
@@ -24,7 +24,7 @@ func (i *Iterator) Rewind() {
 	i.current = i.head
 }
 
-func (i *Iterator) Current() MessageContent {
+func (i *Iterator) Current() NodeContent {
 	return i.current.Data
 }
 
@@ -35,5 +35,5 @@ func (i *Iterator) Next() {
 }
 
 func (i *Iterator) Valid() bool {
-	return i.current != nil
+	return i.current != nil && i.head != nil && i.tail != nil
 }

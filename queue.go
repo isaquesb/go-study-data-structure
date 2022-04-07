@@ -1,30 +1,7 @@
 package main
 
-type MessageContent = interface{}
-
-type DequeueStrategy interface {
-	Dequeue(q *Queue) MessageContent
-}
-
-type Message struct {
-	Data MessageContent
-	next *Message
-	prev *Message
-}
-
 type Queue struct {
 	iterator *Iterator
-}
-
-type Strategy struct {
-}
-
-type Fifo struct {
-	Strategy
-}
-
-type Lifo struct {
-	Strategy
 }
 
 func (q *Queue) GetIterator() *Iterator {
@@ -34,8 +11,8 @@ func (q *Queue) GetIterator() *Iterator {
 	return q.iterator
 }
 
-func (q *Queue) Enqueue(c MessageContent) {
-	m := &Message{Data: c}
+func (q *Queue) Enqueue(c NodeContent) {
+	m := &Node{Data: c}
 	i := q.GetIterator()
 	if i.head == nil {
 		i.head = m
@@ -49,44 +26,6 @@ func (q *Queue) Enqueue(c MessageContent) {
 	i.count++
 }
 
-func (q *Queue) Dequeue(strategy DequeueStrategy) MessageContent {
+func (q *Queue) Dequeue(strategy DequeueStrategy) NodeContent {
 	return strategy.Dequeue(q)
-}
-
-func (f *Strategy) setHead(m *Message, q *Queue) {
-	q.iterator.head = m
-	if q.iterator.head != nil {
-		q.iterator.head.prev = nil
-	} else {
-		f.setTail(nil, q)
-	}
-}
-
-func (f *Strategy) setTail(m *Message, q *Queue) {
-	q.iterator.tail = m
-	if q.iterator.tail != nil {
-		q.iterator.tail.next = nil
-	}
-}
-
-func (f *Fifo) Dequeue(q *Queue) MessageContent {
-	i := q.GetIterator()
-	if i.head == nil {
-		return nil
-	}
-	m := i.head
-	f.setHead(m.next, q)
-	i.count--
-	return m.Data
-}
-
-func (l *Lifo) Dequeue(q *Queue) MessageContent {
-	i := q.GetIterator()
-	if i.tail == nil {
-		return nil
-	}
-	m := i.tail
-	l.setTail(m.prev, q)
-	i.count--
-	return m.Data
 }
