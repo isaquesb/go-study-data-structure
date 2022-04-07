@@ -40,4 +40,6 @@ func main() {
 	fmt.Println(q.Dequeue(l))
 	fmt.Println(i.Count())
 	fmt.Println(q.Dequeue(l))
+
+	fmt.Println("========= FINISHED =====")
 }
