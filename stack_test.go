@@ -1,15 +1,15 @@
 package main_test
 
 import (
-	queue "github.com/isaquesb/go-study-data-structure"
+	stack "github.com/isaquesb/go-study-data-structure"
 	"testing"
 )
 
-func TestQueue_Enqueue(t *testing.T) {
-	q := &queue.Queue{}
-	q.Enqueue("Alex")
-	q.Enqueue("John")
-	q.Enqueue("Mary")
+func TestStack_Push(t *testing.T) {
+	q := &stack.Stack{}
+	q.Push("Alex")
+	q.Push("John")
+	q.Push("Mary")
 
 	i := q.GetIterator()
 	count := i.Count()
@@ -19,11 +19,11 @@ func TestQueue_Enqueue(t *testing.T) {
 	}
 }
 
-func TestQueue_Dequeue(t *testing.T) {
-	q := &queue.Queue{}
-	q.Enqueue("Alex")
-	q.Enqueue("John")
-	q.Enqueue("Mary")
+func TestStack_Pop(t *testing.T) {
+	q := &stack.Stack{}
+	q.Push("Alex")
+	q.Push("John")
+	q.Push("Mary")
 
 	i := q.GetIterator()
 
@@ -31,18 +31,18 @@ func TestQueue_Dequeue(t *testing.T) {
 		n string
 		c int
 	}{
-		{"Alex", 3},
+		{"Mary", 3},
 		{"John", 2},
-		{"Mary", 1},
+		{"Alex", 1},
 	} {
 		if v.c != i.Count() {
 			t.Errorf("got %d, expected %d", i.Count(), v.c)
 		}
-		if name := q.Dequeue(); name != v.n {
+		if name := q.Pop(); name != v.n {
 			t.Errorf("First got %q, expected %q", name, v.n)
 		}
 	}
-	if name := q.Dequeue(); nil != name {
+	if name := q.Pop(); nil != name {
 		t.Error("Queue problem")
 	}
 }
