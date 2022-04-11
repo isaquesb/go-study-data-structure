@@ -42,7 +42,7 @@ func (p *pipe) setHead(m *Node) {
 	if iterator.head != nil {
 		iterator.head.prev = nil
 	} else {
-		p.setTail(nil)
+		iterator.tail = nil
 	}
 }
 
@@ -55,5 +55,7 @@ func (p *pipe) setTail(m *Node) {
 	}
 	if iterator.tail != nil {
 		iterator.tail.next = nil
+	} else {
+		iterator.head = nil
 	}
 }
