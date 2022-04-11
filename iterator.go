@@ -25,7 +25,10 @@ func (i *Iterator) Rewind() {
 }
 
 func (i *Iterator) Current() NodeContent {
-	return i.current.Data
+	if nil != i.current {
+		return i.current.Data
+	}
+	return nil
 }
 
 func (i *Iterator) Next() {

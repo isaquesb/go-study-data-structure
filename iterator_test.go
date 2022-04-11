@@ -7,20 +7,26 @@ import (
 
 func TestIterator_Navigation(t *testing.T) {
 	q := &ds.Queue{}
+	i := q.GetIterator()
+
+	if c := i.Current(); nil != c {
+		t.Errorf("got %s, expected nil", c)
+		return
+	}
+
 	q.Enqueue("Alex")
 	q.Enqueue("John")
 	q.Enqueue("Mary")
 
-	i := q.GetIterator()
-
 	if c := i.Current(); c != "Alex" {
 		t.Errorf("got %s, expected %s", c, "Alex")
+		return
 	}
 	i.Rewind()
 
 	for j, v := range []string{"Alex", "John", "Mary"} {
 		if c := i.Current(); c != v {
-			t.Errorf("Scenery %d: got %s, expected %s", j, c, v)
+			t.Errorf("scenery %d: got %s, expected %s", j, c, v)
 		}
 		i.Next()
 	}

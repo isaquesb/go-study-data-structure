@@ -34,7 +34,11 @@ func (p *pipe) add(c NodeContent) {
 
 func (p *pipe) setHead(m *Node) {
 	iterator := p.GetIterator()
+	currentIsHead := iterator.current == iterator.head
 	iterator.head = m
+	if currentIsHead {
+		iterator.current = iterator.head
+	}
 	if iterator.head != nil {
 		iterator.head.prev = nil
 	} else {
@@ -44,7 +48,11 @@ func (p *pipe) setHead(m *Node) {
 
 func (p *pipe) setTail(m *Node) {
 	iterator := p.GetIterator()
+	currentIsTail := iterator.current == iterator.tail
 	iterator.tail = m
+	if currentIsTail {
+		iterator.current = iterator.tail
+	}
 	if iterator.tail != nil {
 		iterator.tail.next = nil
 	}
