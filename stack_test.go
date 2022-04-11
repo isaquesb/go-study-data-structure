@@ -1,12 +1,12 @@
 package main_test
 
 import (
-	stack "github.com/isaquesb/go-study-data-structure"
+	ds "github.com/isaquesb/go-study-data-structure"
 	"testing"
 )
 
 func TestStack_Push(t *testing.T) {
-	q := &stack.Stack{}
+	q := &ds.Stack{}
 	q.Push("Alex")
 	q.Push("John")
 	q.Push("Mary")
@@ -20,7 +20,7 @@ func TestStack_Push(t *testing.T) {
 }
 
 func TestStack_Pop(t *testing.T) {
-	q := &stack.Stack{}
+	q := &ds.Stack{}
 	q.Push("Alex")
 	q.Push("John")
 	q.Push("Mary")

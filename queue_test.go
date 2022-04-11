@@ -1,12 +1,12 @@
 package main_test
 
 import (
-	queue "github.com/isaquesb/go-study-data-structure"
+	ds "github.com/isaquesb/go-study-data-structure"
 	"testing"
 )
 
 func TestQueue_Enqueue(t *testing.T) {
-	q := &queue.Queue{}
+	q := &ds.Queue{}
 	q.Enqueue("Alex")
 	q.Enqueue("John")
 	q.Enqueue("Mary")
@@ -20,7 +20,7 @@ func TestQueue_Enqueue(t *testing.T) {
 }
 
 func TestQueue_Dequeue(t *testing.T) {
-	q := &queue.Queue{}
+	q := &ds.Queue{}
 	q.Enqueue("Alex")
 	q.Enqueue("John")
 	q.Enqueue("Mary")
