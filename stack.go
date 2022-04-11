@@ -5,7 +5,7 @@ type Stack struct {
 }
 
 func (s *Stack) Push(c NodeContent) {
-	s.add(c)
+	s.addLast(c)
 }
 
 func (s *Stack) Pop() NodeContent {

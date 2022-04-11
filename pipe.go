@@ -17,7 +17,24 @@ func (p *pipe) GetIterator() *Iterator {
 	return p.iterator
 }
 
-func (p *pipe) add(c NodeContent) {
+func (p *pipe) addFirst(c NodeContent) {
+	m := &Node{Data: c}
+	i := p.GetIterator()
+	m.next = i.head
+	currentIsHead := i.current == i.head
+	if nil != i.head {
+		i.head.prev = m
+	} else {
+		i.tail = m
+	}
+	i.head = m
+	i.count++
+	if currentIsHead {
+		i.current = i.head
+	}
+}
+
+func (p *pipe) addLast(c NodeContent) {
 	m := &Node{Data: c}
 	i := p.GetIterator()
 	if i.head == nil {

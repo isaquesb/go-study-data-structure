@@ -5,24 +5,11 @@ type LinkedList struct {
 }
 
 func (l *LinkedList) AddFirst(c NodeContent) {
-	m := &Node{Data: c}
-	i := l.GetIterator()
-	m.next = i.head
-	currentIsHead := i.current == i.head
-	if nil != i.head {
-		i.head.prev = m
-	} else {
-		i.tail = m
-	}
-	i.head = m
-	i.count++
-	if currentIsHead {
-		i.current = i.head
-	}
+	l.addFirst(c)
 }
 
 func (l *LinkedList) AddLast(c NodeContent) {
-	l.add(c)
+	l.addLast(c)
 }
 
 func (l *LinkedList) RemoveFirst() {

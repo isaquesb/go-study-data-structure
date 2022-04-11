@@ -5,7 +5,7 @@ type Queue struct {
 }
 
 func (q *Queue) Enqueue(c NodeContent) {
-	q.add(c)
+	q.addLast(c)
 }
 
 func (q *Queue) Dequeue() NodeContent {
